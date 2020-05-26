@@ -1,0 +1,22 @@
+default_platform(:ios)
+platform :ios do
+  desc "Build App in local"
+  lane :build_local do
+    make_build_folder
+    build_ios_app(
+      scheme: "DemoJenkins", 
+      workspace: "DemoJenkins.xcworkspace",
+      configuration: "Debug", 
+      export_method: "development",
+      output_directory: "./build",
+      output_name: "DemoJenkins.ipa",
+      silent: true,
+      clean: true
+    )
+  end 
+
+  desc "Make build Folder"
+  private_lane :make_build_folder do
+    sh "mkdir -p ./build"
+  end
+end
